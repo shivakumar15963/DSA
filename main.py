@@ -65,7 +65,7 @@ If all assertions pass, then your solution will be accepted.
 
 '''
 
-nums:list[int] = [0,0,1,1,1,2,2,3,3,4]
+# nums:list[int] = [0,0,1,1,1,2,2,3,3,4]
 
 def remove_duplicates_inplace(nums:list[int]) -> list[int]:
 
@@ -85,4 +85,84 @@ def remove_duplicates_inplace(nums:list[int]) -> list[int]:
         fast +=1
     return nums[:slow + 1]    
 
-print(remove_duplicates_inplace(nums))
+# print(remove_duplicates_inplace(nums))
+
+
+
+## ----------------------- Valid Palindrome -------------------------- ##
+
+'''
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+
+Given a string s, return true if it is a palindrome, or false otherwise.
+
+ 
+
+Example 1:
+
+Input: s = "A man, a plan, a canal: Panama"
+Output: true
+Explanation: "amanaplanacanalpanama" is a palindrome.
+
+'''
+
+import re
+
+# s = "$A man, a plan, a canal: Panama"
+
+def isPalindrome(s: str) -> bool:
+
+    s = re.sub(r'[^a-z0-9]', '', s.lower())
+    left, right = 0, len(s) -1
+
+    while left <=right:
+        if s[left] != s[right]: return False
+
+        left +=1
+        right -=1
+
+    return True
+
+# print(isPalindrome(s))
+
+
+
+
+## -------------------- Container With Most Water ---------------------- ##
+
+'''
+You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+
+Find two lines that together with the x-axis form a container, such that the container contains the most water.
+
+Return the maximum amount of water a container can store.
+
+Notice that you may not slant the container.
+
+Input: height = [1,8,6,2,5,4,8,3,7]
+Output: 49
+Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
+
+
+'''
+height = [1,8,6,2,5,4,8,3,7]
+
+def maxArea(height: list[int]) -> int:
+        max_area: int = 0
+        left = 0
+        right = len(height) -1
+
+        while left < right:
+
+            area = min(height[left], height[right]) * (right -left)
+
+            max_area = max(max_area, area)
+
+            if height[left] < height[right]:
+                left +=1
+            else:
+                right -=1
+
+        return max_area
+
+print(maxArea(height))
