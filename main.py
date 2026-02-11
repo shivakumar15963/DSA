@@ -213,4 +213,109 @@ def maxOperations(nums: list[int], k: int) -> int:
 
         return max_operations
 
-print(maxOperations(nums,k))
+# print(maxOperations(nums,k))
+
+
+## --------------------- Squares of Sorted array -------------- ##
+
+'''
+Example 1:
+
+Input: nums = [-4,-1,0,3,10]
+Output: [0,1,9,16,100]
+Explanation: After squaring, the array becomes [16,1,0,9,100].
+After sorting, it becomes [0,1,9,16,100].
+Example 2:
+
+Input: nums = [-7,-3,2,3,11]
+Output: [4,9,9,49,121]
+
+
+
+'''
+
+# nums = [-4,-1,0,3,10]
+
+def sortedSquares(nums: list[int]) -> list[int]:
+        n = len(nums)
+        left = 0
+        right = len(nums) - 1
+        pos = len(nums) - 1
+
+        result = [0] * n
+
+        while left <= right:
+
+            if abs(nums[left]) > abs(nums[right]):
+
+                result[pos] = nums[left] **2
+                left +=1
+
+            else:
+
+                result[pos] = nums[right] **2
+                right -=1
+
+            pos -=1       
+
+        return result   
+
+# print(sortedSquares(nums))  
+
+
+## ------------------ Reverse the string in place ---------------------- ##
+
+'''
+Write a function that reverses a string. The input string is given as an array of characters s.
+
+You must do this by modifying the input array in-place with O(1) extra memory.
+
+ 
+
+Example 1:
+
+Input: s = ["h","e","l","l","o"]
+Output: ["o","l","l","e","h"]
+Example 2:
+
+Input: s = ["H","a","n","n","a","h"]
+Output: ["h","a","n","n","a","H"]
+
+'''
+
+def reverseString(s: list[str]) -> None:
+        left = 0
+        right = len(s) - 1
+
+        while left < right:
+            s[left], s[right] = s[right], s[left]
+            left += 1
+            right -= 1
+
+
+
+def reverseVowels(s: str) -> str:
+    # Convert string to list because strings are immutable in Python
+    chars = list(s)
+    vowels = set("aeiouAEIOU")
+    left, right = 0, len(chars) - 1
+    
+    while left < right:
+        # Move left pointer until a vowel is found
+        while left < right and chars[left] not in vowels:
+            left += 1
+        
+        # Move right pointer until a vowel is found
+        while left < right and chars[right] not in vowels:
+            right -= 1
+        
+        # Swap the vowels
+        chars[left], chars[right] = chars[right], chars[left]
+        
+        # Move pointers inward
+        left += 1
+        right -= 1
+        
+    return "".join(chars)
+
+print(reverseVowels(s = "IceCreAm"))
